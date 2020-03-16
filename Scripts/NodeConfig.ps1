@@ -12,14 +12,11 @@
             DestinationPath = "C:\Scripts"
         }
 
-        Script DownloadAndExecuteScript
+        Script DownloadScript
         {
             GetScript = 
             {
                 @{
-                    GetScript = $GetScript
-                    SetScript = $SetScript
-                    TestScript = $TestScript
                     Result = ('True' -in (Test-Path C:\Scripts\Install-CniPlugin.ps1))
                 }
             }
@@ -27,13 +24,31 @@
             SetScript = 
             {
                 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Oldervoll/kubethings/master/Scripts/Install-CniPlugin.ps1" -OutFile "C:\Scripts\Install-CniPlugin.ps1"
-                Invoke-Expression -Command "C:\Scripts\Install-CniPlugin.ps1 v1.0.33"
             }
 
             TestScript = 
             {
-                $Status = ('True' -in (Test-Path c:\Scripts\Install-CniPlugin.ps1))
-                $Status -eq $True
+                Test-Path "c:\Scripts\Install-CniPlugin.ps1"
+            }
+        }
+
+        Script ExecuteScript
+        {
+            GetScript = 
+            {
+                @{
+                    Result = ((C:\k\azurecni\bin\azure-vnet.exe -v) -eq "Azure CNI Version v1.0.33")
+                }
+            }
+
+            SetScript = 
+            {
+                Invoke-Expression -Command "C:\Scripts\Install-CniPlugin.ps1 v1.0.33";
+            }
+
+            TestScript = 
+            {
+                (C:\k\azurecni\bin\azure-vnet.exe -v) -eq "Azure CNI Version v1.0.33"
             }
         }
     }
