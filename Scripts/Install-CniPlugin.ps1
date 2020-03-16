@@ -7,7 +7,7 @@
 [CmdletBinding(DefaultParameterSetName="Standard")]
 param(
     [string]
-    [parameter(Mandatory=$true)]
+    [parameter(Mandatory=$false)]
     [ValidateNotNullOrEmpty()]
     $PluginVersion = "v1.0.33",
 
