@@ -27,7 +27,7 @@
             SetScript = 
             {
                 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Oldervoll/kubethings/master/Scripts/Install-CniPlugin.ps1" -OutFile "C:\Scripts\Install-CniPlugin.ps1"
-                Invoke-Expression -Command "C:\Scripts\Install-CniPlugin.ps1"
+                Invoke-Expression -Command "C:\Scripts\Install-CniPlugin.ps1 v1.0.33"
             }
 
             TestScript = 
