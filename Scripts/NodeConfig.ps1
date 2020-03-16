@@ -5,15 +5,15 @@
 
     # The Node statement specifies which targets this configuration will be applied to.
     Node 'localhost' {
-		File ScriptFolder 
-		{
+        File ScriptFolder 
+        {
             Type = "Directory"
             Ensure = "Present"
             DestinationPath = "C:\Scripts"
         }
 
-		Script DownloadAndExecuteScript
-		{
+        Script DownloadAndExecuteScript
+        {
             GetScript = 
             {
                 @{
@@ -26,7 +26,7 @@
 
             SetScript = 
             {
-                Invoke-WebRequest -Uri "https://github.com/Oldervoll/kubethings/blob/master/Scripts/Install-CniPlugin.ps1" -OutFile "C:\Scripts\Install-CniPlugin.ps1"
+                Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Oldervoll/kubethings/master/Scripts/Install-CniPlugin.ps1" -OutFile "C:\Scripts\Install-CniPlugin.ps1"
                 Invoke-Expression -Command "C:\Scripts\Install-CniPlugin.ps1"
             }
 
